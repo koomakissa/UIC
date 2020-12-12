@@ -12,8 +12,9 @@ var nonEmptySelects = ["gender", "nationality"];
 $(document).ready(function() {
   initialize();
   validateUserInputs();
+  createIdCard();
   resetForm();
-
+  
   
   $('.input').on('input', function()
   {
@@ -100,5 +101,17 @@ function resetForm()
     $('.is-invalid').removeClass('is-invalid');
     $("#idCard-form").trigger("reset");
     $('#clearFormModal').modal('toggle');
+  });
+}
+
+function createIdCard() {
+  $("#create-id-card-confimed").click(function(){
+    console.log("card has been created");
+    $("#givenFirstName").text($("#firstName").val());
+    $("#givenLastName").text($("#lastName").val());
+    $("#givenBirthDate").text($("#birthDate").val());
+    $("#givenGender").text($("#gender option:selected").val());
+    $("#givenNationality").text($("#nationality option:selected").val());
+    $("#givenIdNumber").text($("#idNumber").val());
   });
 }
