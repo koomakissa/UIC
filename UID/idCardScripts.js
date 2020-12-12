@@ -11,8 +11,8 @@ var nonEmptySelects = ["gender", "nationality"];
 
 $(document).ready(function() {
   initialize();
-  validateUserInputs();
   createIdCard();
+  validateUserInputs();
   resetForm();
   
   
@@ -114,4 +114,8 @@ function createIdCard() {
     $("#givenNationality").text($("#nationality option:selected").val());
     $("#givenIdNumber").text($("#idNumber").val());
   });
+}
+
+function foo(){
+  console.log("test log");
 }
