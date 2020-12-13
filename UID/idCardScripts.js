@@ -1,3 +1,4 @@
+// Ann-Sofi's part
 var nationalities = ["Afghan", "Albanian", "Algerian", "American", "Andorran", 
                      "Angolan",	"Anguillan",	"Citizen of Antigua and Barbuda",
                      "Argentine",	"Armenian",	"Australian",	"Austrian",
@@ -5,17 +6,19 @@ var nationalities = ["Afghan", "Albanian", "Algerian", "American", "Andorran",
                      "Barbadian", "Belgian", "Belizean", "Beninese",
                      "Bermudian"];
 
-var nonEmptyInputs = ["lastName", "birthDate", "idNumber", "picture"];
+var nonEmptyInputs = ["lastName", "birthDate", "idNumber", "pictureInput"];
 
 var nonEmptySelects = ["gender", "nationality"];
 
+var userInformation = {firstName: "", lastName: "", birthDate: "", gender: "", nationality: "", idNumber: "", picture: ""};
+
 $(document).ready(function() {
   initialize();
-  createIdCard();
   validateUserInputs();
   resetForm();
-  
-  
+  showIdCard();
+  createANewIDCard(); 
+
   $('.input').on('input', function()
   {
     if($(this).val().length != 0)
@@ -32,7 +35,6 @@ $(document).ready(function() {
 });
 
 
-
 function initialize() {
   createNationalityOptions();
 }
@@ -46,6 +48,7 @@ function createNationalityOptions() {
   }
 }
 
+
 function validateUserInputs()
 {
   $("#btn-create-id-card").click(function(){
@@ -54,15 +57,21 @@ function validateUserInputs()
 
     if (!$(".is-invalid")[0])
     {
-      $("#firstNameConfirmation").text($("#firstName").val());
-      $("#lastNameConfirmation").text($("#lastName").val());
-      $("#birthDateConfirmation").text($("#birthDate").val());
-      $("#genderConfirmation").text($("#gender option:selected").val());
-      $("#nationalityConfirmation").text($("#nationality option:selected").val());
-      $("#idNumberConfirmation").text($("#idNumber").val());
+      userInformation.firstName = $("#firstName").val();
+      userInformation.lastName = $("#lastName").val();
+      userInformation.birthDate = $("#birthDate").val();
+      userInformation.gender = $("#gender option:selected").val();
+      userInformation.nationality = $("#nationality option:selected").val();
+      userInformation.idNumber = $("#idNumber").val();
+
+      $(".firstNameShown").text(userInformation.firstName);
+      $(".lastNameShown").text(userInformation.lastName);
+      $(".birthDateShown").text(userInformation.birthDate);
+      $(".genderShown").text(userInformation.gender);
+      $(".nationalityShown").text(userInformation.nationality);
+      $(".idNumberShown").text(userInformation.idNumber);
 
       $('#createIdCardModal').modal('show');
-     
 
     }
   });
@@ -104,18 +113,74 @@ function resetForm()
   });
 }
 
-function createIdCard() {
-  $("#create-id-card-confimed").click(function(){
-    console.log("card has been created");
-    $("#givenFirstName").text($("#firstName").val());
-    $("#givenLastName").text($("#lastName").val());
-    $("#givenBirthDate").text($("#birthDate").val());
-    $("#givenGender").text($("#gender option:selected").val());
-    $("#givenNationality").text($("#nationality option:selected").val());
-    $("#givenIdNumber").text($("#idNumber").val());
+// Eira's part
+function showIdCard()
+{
+  console.log("ready for card creation");
+  $("#create-id-card-confirmation-btn").click(function() {
+    
+    /* kokeilin laittaa showPicturen ja readURLin sisällöt suoraan tähän, mutta ne ei vaan toimi?
+
+    let reader = new FileReader();
+    reader.onload = function(e) {
+      $("pictureShown").attr('src', e.target.result);
+      console.log("eka juttu");
+    }
+    function readURL(input) {
+      if(input.files && input.files[0]) {
+        reader.readAsDataURL(input.files[0]);
+      }
+      console.log("toka juttu");
+    }
+    $("#pictureInput").change(function(){
+      readURL(this);
+      console.log("kolmas juttu");
+    })
+
+    */
+    $("#createIdCardModal").modal('hide');
+    $("#idCardForm").hide();
+    $("#idCard").show();
+    console.log("the button has been clicked and a new card has been created!");
   });
+  
 }
 
-function foo(){
-  console.log("test log");
+function createANewIDCard() 
+{
+  $("#create-new-id-card").click(function() {
+    console.log("creation of another card has begun");
+    $('.is-invalid').removeClass('is-invalid');
+    $("#idCard-form").trigger("reset");
+    $("#idCardForm").show();
+    $("#idCard").hide();
+  });
+  
+}
+
+// molemmat alla olevat funktiot on tehty tutorialien perusteella ja pitäisi toimia, mutta ei toimi :(
+function showPicture()
+{
+  console.log("kuvan pitäisi alkaa näkyä...");
+  $("#pictureInput").change(function(){
+    console.log("TADAA JOTAIN TAPAHTUI");
+    readURL(this);
+    console.log("kuva näkyy??");
+  });
+  
+}
+
+
+function readURL(i) 
+{
+  console.log("picture function is running");
+  if (i.files && i.files[0]) {
+    let reader = new FileReader();
+    reader.onload = function(e) {
+      //$("#pictureShown").after('<img src="'+e.target.result+'" width="450" height="300"/>');
+      $("#pictureShown").attr("src", e.target.result);
+    }
+    reader.readAsDataURL(i.files[0]);
+    console.log("picture is shown");
+  }
 }

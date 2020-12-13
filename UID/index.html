@@ -9,133 +9,171 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+ 
 </head>
 <body class="body">
-  <div class="panel">
-    <div class="panel-body">
-      <h1>Create your digital ID card</h1>
+  <!-- Ann-Sofi's part -->
+  <div id="idCardForm">
+    <div class="panel">
+      <div class="panel-body">
+        <h1>Create your digital ID card</h1>
+      </div>
     </div>
-  </div>
-  <div class="panel">
-    <div class="panel-body">
-      <form id="idCard-form">
-        <div class="form-row margin-bottom-md">
-          <div class="col">
-            <label>First name:</label>
-            <input class="form-control" id="firstName">
-          </div>
-        </div>
-        <div class="form-row margin-bottom-md">
-          <div class="col">
-            <label>Last name:</label>
-            <input type="text" class="form-control input" id="lastName" required>
-            <div class="invalid-feedback">
-              Please, enter your last name.
+    <div class="panel">
+      <div class="panel-body">
+        <form id="idCard-form">
+          <div class="form-row margin-bottom-md">
+            <div class="col">
+              <label>First name(s):</label>
+              <input class="form-control" id="firstName">
             </div>
           </div>
-        </div>
-        <div class="form-row margin-bottom-md">
-          <div class="col">
-            <label for="birthDate">Birth date:</label>
-            <input type="date" class="form-control input" id="birthDate" required>
-            <div class="invalid-feedback">
-              Please, enter your birth date.
+          <div class="form-row margin-bottom-md">
+            <div class="col">
+              <label>Last name:</label>
+              <input type="text" class="form-control input" id="lastName" required>
+              <div class="invalid-feedback">
+                Please, enter your last name.
+              </div>
             </div>
           </div>
-          
-          <div class="col">
-            <label for="gender">Gender:</label>
-            <select class="form-control form-control-md select" id="gender" required>
-              <option hidden val="hidden"></option>
-              <option>Male</option>
-              <option>Female</option>
-              <option>Other</option>
-            </select>
-            <div class="invalid-feedback">
-              Please, enter your gender.
+          <div class="form-row margin-bottom-md">
+            <div class="col">
+              <label for="birthDate">Birth date:</label>
+              <input type="date" class="form-control input" id="birthDate" required>
+              <div class="invalid-feedback">
+                Please, enter your birth date.
+              </div>
+            </div>
+            
+            <div class="col">
+              <label for="gender">Gender:</label>
+              <select class="form-control form-control-md select" id="gender" required>
+                <option hidden val="hidden"></option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+              </select>
+              <div class="invalid-feedback">
+                Please, enter your gender.
+              </div>
             </div>
           </div>
-        </div>
-        <div class="form-row margin-bottom-md">
-          <div class="col">
-            <label for="gender">Nationality:</label>
-            <select class="form-control form-control-md select" id="nationality" required>
-              <option hidden></option>
-            </select>
-            <div class="invalid-feedback">
-              Please, enter your nationality.
+          <div class="form-row margin-bottom-md">
+            <div class="col">
+              <label for="gender">Nationality:</label>
+              <select class="form-control form-control-md select" id="nationality" required>
+                <option hidden></option>
+              </select>
+              <div class="invalid-feedback">
+                Please, enter your nationality.
+              </div>
+            </div>
+            <div class="col">
+              <label for="gender">Personal ID number:</label>
+              <input class="form-control input" id="idNumber">
+              <div class="invalid-feedback">
+                Please, enter your ID number.
+              </div>
             </div>
           </div>
-          <div class="col">
-            <label for="gender">Personal ID number:</label>
-            <input class="form-control input" id="idNumber">
-            <div class="invalid-feedback">
-              Please, enter your ID number.
+          <div class="form-row margin-bottom-lg">
+            <div class="col">
+              <label for="picture">Picture:</label>
+              <input type="file" accept="image/jpeg, image/png" class="form-control-file" id="pictureInput" > <!--added what kind of files accepted (only images in jpeg or png form)-->
+              <div class="invalid-feedback">
+                Please, choose your picture.
+              </div>
             </div>
           </div>
-        </div>
-        <div class="form-row margin-bottom-lg">
-          <div class="col">
-            <label for="picture">Picture:</label>
-            <input type="file" class="form-control-file" id="picture">
-            <div class="invalid-feedback">
-              Please, choose your picture.
+          <div class="form-row">
+            <div class="col">
+              <button type="button" id="btn-clear-form" class="btn btn-form btn-secondary" data-toggle="modal" data-target="#clearFormModal">Clear</button>
+            </div>
+            <div class="col">
+              <button type="button" id="btn-create-id-card" class="btn btn-form btn-primary">Create your ID card</button>
             </div>
           </div>
-        </div>
-        <div class="form-row">
-          <div class="col">
-            <button type="button" id="btn-clear-form" class="btn btn-form btn-secondary" data-toggle="modal" data-target="#clearFormModal">Clear</button>
-          </div>
-          <div class="col">
-            <button type="button" id="btn-create-id-card" class="btn btn-form btn-primary">Create ID card</button>
-          </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
-  </div>
 
-  <div class="modal fade" id="clearFormModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3>Confirmation</h3>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+    <div class="modal fade" id="clearFormModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>Confirmation</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Do you want to clear the form?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            <button type="button" class="btn btn-primary" id="clear-form-confimed">Yes</button>
+          </div>
         </div>
-        <div class="modal-body">
-          Do you want to clear the form?
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-          <button type="button" class="btn btn-primary" id="clear-form-confimed">Yes</button>
+      </div>
+    </div>
+
+    <div class="modal fade" id="createIdCardModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>Confirmation</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <strong>Do you want to create your ID card with the following information?</strong>
+            <p style="margin-top: 20px;">First name(s): <text class="firstNameShown"></text></p>
+            <p>Last name: <text class="lastNameShown"></text></p>
+            <p>Birth date: <text class="birthDateShown"></text></p>
+            <p>Gender: <text class="genderShown"></text></p>
+            <p>Nationality: <text class="nationalityShown"></text></p>
+            <p>Personal ID number: <text class="idNumberShown"></text></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            <button type="button" class="btn btn-primary" id="create-id-card-confirmation-btn">Yes</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="modal fade" id="createIdCardModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3>Confirmation</h3>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+  <!-- Eira's part -->
+  <div id="idCard" style="display:none">
+    <div class="panel">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-xs-6">
+            <h2>Your digital ID card</h2>
+          </div>
+          <div class="col-xs-6">
+            <button type="button" id="create-new-id-card" class="btn btn-form btn-primary margin-top-md">Create a new ID card</button>
+          </div>
         </div>
-        <div class="modal-body">
-          <strong>Do you want to create the ID card with the following information?</strong>
-          <p style="margin-top: 20px;">First name: <text id="firstNameConfirmation"></text></p>
-          <p>Last name: <text id="lastNameConfirmation"></text></p>
-          <p>Birth date: <text id="birthDateConfirmation"></text></p>
-          <p>Gender: <text id="genderConfirmation"></text></p>
-          <p>Nationality: <text id="nationalityConfirmation"></text></p>
-          <p>Personal ID number: <text id="idNumberConfirmation"></text></p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-          <a href="idCard.html"><button type="button" class="btn btn-primary" id="create-id-card-confimed">Yes</button></a>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-xs-7">
+          <p>First name(s): <text class="firstNameShown"></text></p>
+          <p>Last name: <text class="lastNameShown"></text></p>
+          <p>Birth date: <text class="birthDateShown"></text></p>
+          <p>Gender: <text class="genderShown"></text></p>
+          <p>Nationality: <text class="nationalityShown"></text></p>
+          <p class="margin-bottom-lg">Personal ID number: <text class="idNumberShown"></text></p>
+          </div>
+          <div class="col-xs-5">
+          <!--<p>Picture's place holder</p>-->
+          <img src="#" id="pictureShown" width="200">
+          </div>
         </div>
       </div>
     </div>
